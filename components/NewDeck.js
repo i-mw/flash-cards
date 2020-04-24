@@ -20,7 +20,7 @@ const Input = Styled.TextInput`
   border: 1px solid gray
   padding: 10px;
   font-size: 1.1em;
-  `;
+`;
 
 const SubmitBtn = Styled.View`
   margin-top: 30px;
