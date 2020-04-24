@@ -12,7 +12,7 @@ const Container = Styled.View`
 const QAWrapper = Styled.View`
 `;
 const QATxt = Styled.Text`
-  font-size: 2.5em;
+  font-size: 40px;
   text-align: center;
 `;
 const QABtn = Styled.TouchableOpacity`
@@ -21,7 +21,7 @@ const QABtn = Styled.TouchableOpacity`
 const QABtnTxt = Styled.Text`
   text-align: center;
   color: darkred;
-  font-size: 1.1em;
+  font-size: 17.6px;
 `;
 
 const BtnWrapper = Styled.View`

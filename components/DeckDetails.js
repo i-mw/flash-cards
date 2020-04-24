@@ -14,12 +14,12 @@ const HeadingWrapper = Styled.View`
 `;
 const Heading = Styled.Text`
   text-align: center;
-  font-size: 2em;
+  font-size: 32px;
   margin-bottom: 15px;
 `;
 const SubHeading = Styled.Text`
   text-align: center;
-  font-size: 1.1em;
+  font-size: 17.6px;
   color: gray;
 `;
 const BtnWrapper = Styled.View`
@@ -37,7 +37,7 @@ const DeleteDeckBtn = Styled.TouchableOpacity`
 const DeleteBtnTxt = Styled.Text`
   text-align: center;
   color: darkred;
-  font-size: 0.9em;
+  font-size: 14.4px;
 `;
 
 export default function DeckDetails({ navigation }) {

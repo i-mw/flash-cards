@@ -13,12 +13,12 @@ const Container = Styled.View`
 
 const HeadingTxt = Styled.Text`
   text-align: center;
-  font-size: 1.3em;
+  font-size: 20.8px;
   margin-bottom: 15px;
 `
 const ScoreTxt = Styled.Text`
   text-align: center;
-  font-size: 6em;
+  font-size: 96px;
   margin-bottom: 50px;
 `
 const GoHomeBtn = Styled.View`

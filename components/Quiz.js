@@ -9,15 +9,15 @@ const Container = Styled.View`
   padding: 15px;
 `
 const Txt = Styled.Text`
-  font-size: 1.1em;
+  font-size: 17.6px;
 `
 
 export default function Quiz() {
   return (
     <Container>
       <Txt>2/2</Txt>
-      <CardDetails/>
-      {/* <Score/> */}
+      {/* <CardDetails/> */}
+      <Score/>
     </Container>
   )
 }

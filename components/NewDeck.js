@@ -11,15 +11,15 @@ const Container = Styled.View`
 `;
 
 const Heading = Styled.Text`
-  font-size: 2.5em;
+  font-size: 40px;
   text-align: center;
 `;
 
 const Input = Styled.TextInput`
   margin-top: 70px;
-  border: 1px solid gray
+  border: 1px solid gray;
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 17.6px;
 `;
 
 const SubmitBtn = Styled.View`

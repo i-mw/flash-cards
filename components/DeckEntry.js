@@ -18,12 +18,12 @@ const Container = Styled.TouchableOpacity`
 `;
 
 const Heading = Styled.Text`
-  font-size: 1.2em;
+  font-size: 19.2px;
   margin-bottom: 10px;
 `;
 
 const SubHeading = Styled.Text`
-  font-size: 0.8em;
+  font-size: 12.8px;
   color: gray;
 `;
 

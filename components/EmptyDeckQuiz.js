@@ -10,7 +10,7 @@ const Container = Styled.View`
 `
 const Txt = Styled.Text`
   text-align: center;
-  font-size: 1.2em;
+  font-size: 19.2px;
 `
 
 export default function EmptyDeckQuiz() {

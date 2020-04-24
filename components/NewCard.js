@@ -12,7 +12,7 @@ const Input = Styled.TextInput`
   margin-bottom: 25px;
   border: 1px solid gray
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 17.6px;
 `;
 const SubmitBtn = Styled.View`
   margin-top: 15px;
