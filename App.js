@@ -31,7 +31,7 @@ export default function App() {
         <Stack.Screen name="DeckDetails" component={DeckDetails} />
         <Stack.Screen name="NewCard" component={NewCard} options={{title: 'Add Card'}}/>
         <Stack.Screen name="Quiz" component={Quiz} options={{title: 'Quiz'}}/>
-        <Stack.Screen name="EmptyDeckQuiz" component={EmptyDeckQuiz} />
+        <Stack.Screen name="EmptyDeckQuiz" component={EmptyDeckQuiz} options={{title: 'Quiz'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
