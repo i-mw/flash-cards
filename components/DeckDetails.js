@@ -51,6 +51,7 @@ export default function DeckDetails({ navigation }) {
       <BtnWrapper>
         <AddCardBtn>
           <Button
+            color="gray"
             title="Add Card"
             onPress={() => navigation.navigate("NewCard")}
           />
