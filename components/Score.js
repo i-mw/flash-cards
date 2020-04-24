@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
-import Styled from 'styled-components/native'
+import Styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = Styled.View`
   flex: 1;
@@ -15,17 +16,19 @@ const HeadingTxt = Styled.Text`
   text-align: center;
   font-size: 20.8px;
   margin-bottom: 15px;
-`
+`;
 const ScoreTxt = Styled.Text`
   text-align: center;
   font-size: 96px;
   margin-bottom: 50px;
-`
+`;
 const GoHomeBtn = Styled.View`
   width: 50%;
-`
+`;
 
 export default function Score() {
+  const navigation = useNavigation();
+
   return (
     <Container>
       <HeadingTxt>Your Score is</HeadingTxt>
@@ -33,7 +36,7 @@ export default function Score() {
       <GoHomeBtn>
         <Button
           title="Go to decks"
-          onPress={() => navigation.navigate("DeckDetails")}
+          onPress={() => navigation.navigate("Home", { scree: "DeckList" })}
         />
       </GoHomeBtn>
     </Container>
