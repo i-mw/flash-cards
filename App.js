@@ -26,7 +26,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar />
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Quiz">
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="DeckDetails" component={DeckDetails} />
         <Stack.Screen name="NewCard" component={NewCard} options={{title: 'Add Card'}}/>
