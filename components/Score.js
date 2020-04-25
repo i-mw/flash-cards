@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import Styled from "styled-components/native";
-import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import { resetQuiz } from "../actions/currentQuiz";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 const Container = Styled.View`
   flex: 1;
@@ -33,27 +33,30 @@ const GoToDeckBtn = Styled.View`
   margin-top: 30px;
 `;
 
-function Score({ score, deckId, resetQuiz }) {
-  const navigation = useNavigation();
+class Score extends React.Component {
+  componentDidMount() {
+    clearLocalNotification().then(setLocalNotification);
+  }
 
-  return (
-    <Container>
-      <HeadingTxt>Your Score</HeadingTxt>
-      <ScoreTxt>{`${score}%`}</ScoreTxt>
-      <RestartQuizBtn>
-        <Button
-          title="Restart Quiz"
-          onPress={resetQuiz}
-        />
-      </RestartQuizBtn>
-      <GoToDeckBtn>
-        <Button
-          title="Back to Deck"
-          onPress={() => navigation.navigate("DeckDetails", { deckId })}
-        />
-      </GoToDeckBtn>
-    </Container>
-  );
+  render() {
+    const { score, deckId, resetQuiz, navigation } = this.props;
+
+    return (
+      <Container>
+        <HeadingTxt>Your Score</HeadingTxt>
+        <ScoreTxt>{`${score}%`}</ScoreTxt>
+        <RestartQuizBtn>
+          <Button title="Restart Quiz" onPress={resetQuiz} />
+        </RestartQuizBtn>
+        <GoToDeckBtn>
+          <Button
+            title="Back to Deck"
+            onPress={() => navigation.navigate("DeckDetails", { deckId })}
+          />
+        </GoToDeckBtn>
+      </Container>
+    );
+  }
 }
 
 function mapStateToProps({ currentQuiz }) {

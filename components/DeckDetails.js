@@ -5,7 +5,6 @@ import Styled from "styled-components/native";
 import { connect } from "react-redux";
 import { handleDeleteDeck } from "../actions/decks";
 import { resetQuiz } from "../actions/currentQuiz";
-import { setLocalNotification, clearLocalNotification } from "../utils/helpers";
 
 const Container = Styled.View`
   flex: 1;
@@ -60,7 +59,6 @@ class DeckDetails extends React.Component {
       navigation.navigate("EmptyDeckQuiz", { deckId });
     } else {
       resetQuiz();
-      clearLocalNotification().then(setLocalNotification);
       navigation.navigate("Quiz", { deckId });
     }
   };

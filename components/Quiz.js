@@ -13,14 +13,20 @@ const Txt = Styled.Text`
   font-size: 17.6px;
 `;
 
-function Quiz({ currentCardNum, currentCardId, cardsCount, deckId }) {
+function Quiz({
+  currentCardNum,
+  currentCardId,
+  cardsCount,
+  deckId,
+  navigation,
+}) {
   return (
     <Container>
       {currentCardNum <= cardsCount && (
         <Txt>{`${currentCardNum}/${cardsCount}`}</Txt>
       )}
       {currentCardNum > cardsCount ? (
-        <Score deckId={deckId}/>
+        <Score deckId={deckId} navigation={navigation} />
       ) : (
         <CardDetails deckId={deckId} cardId={currentCardId} />
       )}
