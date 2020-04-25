@@ -52,6 +52,13 @@ class DeckDetails extends React.Component {
     })
   };
 
+  handleStartQuiz = () => {
+    const {resetQuiz, navigation, deckId} = this.props
+
+    resetQuiz()
+    navigation.navigate("Quiz", { deckId })
+  }
+
   shouldComponentUpdate() {
     const {render} = this.props
     return render;
@@ -80,7 +87,7 @@ class DeckDetails extends React.Component {
           <StartQuizBtn>
             <Button
               title="Start Quiz"
-              onPress={() => navigation.navigate("Quiz")}
+              onPress={this.handleStartQuiz}
             />
           </StartQuizBtn>
           <DeleteDeckBtn onPress={this.handleDelete}>
@@ -113,7 +120,8 @@ function mapDispatchToProps(dispatch, {route}) {
   const deckId = route.params.deckId
 
   return {
-    handleDeleteDeck: () => dispatch(handleDeleteDeck(deckId))
+    handleDeleteDeck: () => dispatch(handleDeleteDeck(deckId)),
+    resetQuiz: () => dispatch(resetQuiz())
   };
 }
 
