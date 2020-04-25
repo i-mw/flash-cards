@@ -40,13 +40,14 @@ class CardDetails extends React.Component {
   };
 
   render() {
+    const { question, answer} = this.props;
     const { showing } = this.state;
 
     return (
       <Container>
         {showing === "question" ? (
           <QAWrapper>
-            <QATxt>Does React Native work with Android?</QATxt>
+            <QATxt>{question}</QATxt>
             <QABtn>
               <QABtnTxt onPress={() => this.setState({ showing: "answer" })}>
                 Answer
@@ -55,9 +56,9 @@ class CardDetails extends React.Component {
           </QAWrapper>
         ) : (
           <QAWrapper>
-            <QATxt>Yes!</QATxt>
+            <QATxt>{answer}</QATxt>
             <QABtn>
-              <QABtnTxt onPress={() => this.setState({ showing: "answer" })}>
+              <QABtnTxt onPress={() => this.setState({ showing: "question" })}>
                 Question
               </QABtnTxt>
             </QABtn>
@@ -77,4 +78,13 @@ class CardDetails extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardDetails);
+function mapStateToProps({ decks }, { deckId, cardId }) {
+  const card = decks[deckId].cards[cardId];
+
+  return {
+    question: card.question,
+    answer: card.answer
+  };
+}
+
+export default connect(mapStateToProps)(CardDetails);
