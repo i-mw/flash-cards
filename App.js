@@ -37,7 +37,7 @@ function Home() {
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.handleInitialData()
+    this.props.handleInitialData();
   }
 
   render() {
@@ -50,7 +50,11 @@ class App extends React.Component {
             component={Home}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="DeckDetails" component={DeckDetails} />
+          <Stack.Screen
+            name="DeckDetails"
+            component={DeckDetails}
+            options={({ route }) => ({ title: route.params.title })}
+          />
           <Stack.Screen
             name="NewCard"
             component={NewCard}
@@ -74,11 +78,11 @@ class App extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleInitialData: () => dispatch(handleInitialData())
-  }
+    handleInitialData: () => dispatch(handleInitialData()),
+  };
 }
 
-const ConnectedApp = connect(null, mapDispatchToProps)(App)
+const ConnectedApp = connect(null, mapDispatchToProps)(App);
 
 export default function Index() {
   return (

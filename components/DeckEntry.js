@@ -32,7 +32,7 @@ function DeckEntry({ title, cardsCount, deckId }) {
   const navigation = useNavigation();
 
   return (
-    <Container onPress={() => navigation.navigate("DeckDetails", { deckId })}>
+    <Container onPress={() => navigation.navigate("DeckDetails", { deckId, title})}>
       <Heading>{title}</Heading>
       <SubHeading>{`${cardsCount} ${cardsCount === 1 ? 'Card': 'Cards'}`}</SubHeading>
     </Container>

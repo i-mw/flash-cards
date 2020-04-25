@@ -50,7 +50,7 @@ class NewDeck extends React.Component {
     const { deckTitle } = this.state;
 
     handleAddDeck(deckTitle).then((deck) => {
-      navigation.navigate("DeckDetails", { deckId: deck.id });
+      navigation.navigate("DeckDetails", { deckId: deck.id, title: deck.title });
     });
   };
 

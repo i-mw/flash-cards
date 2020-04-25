@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button, TouchableOpacity } from "react-native";
 import {} from "react-native-gesture-handler";
 import Styled from "styled-components/native";
+import { connect } from "react-redux";
 
 const Container = Styled.View`
   flex: 1;
@@ -40,12 +41,12 @@ const DeleteBtnTxt = Styled.Text`
   font-size: 14.4px;
 `;
 
-export default function DeckDetails({ navigation }) {
+function DeckDetails({ navigation, title, cardsCount, deckId }) {
   return (
     <Container>
       <HeadingWrapper>
-        <Heading>A deck title</Heading>
-        <SubHeading>3 cards</SubHeading>
+        <Heading>{title}</Heading>
+        <SubHeading>{`${cardsCount} ${cardsCount === 1 ? 'Card': 'Cards'}`}</SubHeading>
       </HeadingWrapper>
 
       <BtnWrapper>
@@ -53,21 +54,15 @@ export default function DeckDetails({ navigation }) {
           <Button
             color="gray"
             title="Add Card"
-            onPress={() => navigation.navigate("NewCard")}
+            onPress={() => navigation.navigate("NewCard", {deckId})}
           />
         </AddCardBtn>
         <StartQuizBtn>
           <Button
             title="Start Quiz"
-            onPress={() => navigation.navigate("Quiz")}
+            onPress={() => navigation.navigate("Quiz", {deckId})}
           />
         </StartQuizBtn>
-        {/* <StartQuizBtn>
-          <Button
-            title="Start Quiz"
-            onPress={() => navigation.navigate("EmptyDeckQuiz")}
-          />
-        </StartQuizBtn> */}
         <DeleteDeckBtn onPress={() => navigation.navigate("Home")}>
           <DeleteBtnTxt>Delete Deck</DeleteBtnTxt>
         </DeleteDeckBtn>
@@ -75,3 +70,15 @@ export default function DeckDetails({ navigation }) {
     </Container>
   );
 }
+
+function mapStateToProps({decks}, {route}) {
+  const deck = decks[route.params.deckId];
+
+  return {
+    title: deck.title,
+    cardsCount: Object.keys(deck.cards).length,
+    deckId: deck.id
+  }
+}
+
+export default connect(mapStateToProps)(DeckDetails)
