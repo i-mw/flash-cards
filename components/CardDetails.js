@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button, TouchableWithoutFeedback } from "react-native";
 import Styled from "styled-components/native";
 import { connect } from "react-redux";
+import { addAnswer } from "../actions/currentQuiz";
 
 const Container = Styled.View`
   flex: 1;
@@ -40,7 +41,7 @@ class CardDetails extends React.Component {
   };
 
   render() {
-    const { question, answer} = this.props;
+    const { question, answer, handleAnswer } = this.props;
     const { showing } = this.state;
 
     return (
@@ -67,10 +68,14 @@ class CardDetails extends React.Component {
 
         <BtnWrapper>
           <CorrectBtn>
-            <Button color="#008009" title="Correct" />
+            <Button color="#008009" title="Correct" onPress={() => handleAnswer(true)} />
           </CorrectBtn>
           <IncorrectBtn>
-            <Button color="#f54545" title="Incorrect" />
+            <Button
+              color="#f54545"
+              title="Incorrect"
+              onPress={() => handleAnswer(false)}
+            />
           </IncorrectBtn>
         </BtnWrapper>
       </Container>
@@ -83,8 +88,14 @@ function mapStateToProps({ decks }, { deckId, cardId }) {
 
   return {
     question: card.question,
-    answer: card.answer
+    answer: card.answer,
   };
 }
 
-export default connect(mapStateToProps)(CardDetails);
+function mapDispatchToProps(dispatch) {
+  return {
+    handleAnswer: (correct) => dispatch(addAnswer(correct)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardDetails);
