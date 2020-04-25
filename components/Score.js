@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 import Styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
+import { connect } from "react-redux";
 
 const Container = Styled.View`
   flex: 1;
@@ -26,13 +27,13 @@ const GoHomeBtn = Styled.View`
   width: 50%;
 `;
 
-export default function Score() {
+function Score({score}) {
   const navigation = useNavigation();
 
   return (
     <Container>
       <HeadingTxt>Your Score</HeadingTxt>
-      <ScoreTxt>70%</ScoreTxt>
+      <ScoreTxt>{`${score}%`}</ScoreTxt>
       <GoHomeBtn>
         <Button
           title="Go to decks"
@@ -42,3 +43,11 @@ export default function Score() {
     </Container>
   );
 }
+
+function mapStateToProps({currentQuiz}) {
+  return {
+    score: Math.round((currentQuiz.score/(currentQuiz.cardNum-1))*100)
+  }
+}
+
+export default connect(mapStateToProps)(Score)
