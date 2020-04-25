@@ -40,6 +40,13 @@ class CardDetails extends React.Component {
     showing: "question",
   };
 
+  handleAnswer = (correct) => {
+    const {addAnswer} = this.props;
+
+    addAnswer(correct)
+    this.setState({showing: 'question'})
+  }
+
   render() {
     const { question, answer, handleAnswer } = this.props;
     const { showing } = this.state;
@@ -68,13 +75,13 @@ class CardDetails extends React.Component {
 
         <BtnWrapper>
           <CorrectBtn>
-            <Button color="#008009" title="Correct" onPress={() => handleAnswer(true)} />
+            <Button color="#008009" title="Correct" onPress={() => this.handleAnswer(true)} />
           </CorrectBtn>
           <IncorrectBtn>
             <Button
               color="#f54545"
               title="Incorrect"
-              onPress={() => handleAnswer(false)}
+              onPress={() => this.handleAnswer(false)}
             />
           </IncorrectBtn>
         </BtnWrapper>
@@ -94,7 +101,7 @@ function mapStateToProps({ decks }, { deckId, cardId }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleAnswer: (correct) => dispatch(addAnswer(correct)),
+    addAnswer: (correct) => dispatch(addAnswer(correct)),
   };
 }
 
