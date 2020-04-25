@@ -3,6 +3,8 @@ import { View, Text, Button, TouchableOpacity } from "react-native";
 import {} from "react-native-gesture-handler";
 import Styled from "styled-components/native";
 import { connect } from "react-redux";
+import { handleDeleteDeck } from "../actions/decks";
+import { resetQuiz } from "../actions/currentQuiz";
 
 const Container = Styled.View`
   flex: 1;
@@ -41,44 +43,78 @@ const DeleteBtnTxt = Styled.Text`
   font-size: 14.4px;
 `;
 
-function DeckDetails({ navigation, title, cardsCount, deckId }) {
-  return (
-    <Container>
-      <HeadingWrapper>
-        <Heading>{title}</Heading>
-        <SubHeading>{`${cardsCount} ${cardsCount === 1 ? 'Card': 'Cards'}`}</SubHeading>
-      </HeadingWrapper>
+class DeckDetails extends React.Component {
+  handleDelete = () => {
+    const { navigation, handleDeleteDeck } = this.props;
 
-      <BtnWrapper>
-        <AddCardBtn>
-          <Button
-            color="gray"
-            title="Add Card"
-            onPress={() => navigation.navigate("NewCard", {deckId})}
-          />
-        </AddCardBtn>
-        <StartQuizBtn>
-          <Button
-            title="Start Quiz"
-            onPress={() => navigation.navigate("Quiz", {deckId})}
-          />
-        </StartQuizBtn>
-        <DeleteDeckBtn onPress={() => navigation.navigate("Home")}>
-          <DeleteBtnTxt>Delete Deck</DeleteBtnTxt>
-        </DeleteDeckBtn>
-      </BtnWrapper>
-    </Container>
-  );
-}
+    handleDeleteDeck().then(() => {
+      navigation.navigate("Home");
+    })
+  };
 
-function mapStateToProps({decks}, {route}) {
-  const deck = decks[route.params.deckId];
+  shouldComponentUpdate() {
+    const {render} = this.props
+    return render;
+  }
 
-  return {
-    title: deck.title,
-    cardsCount: Object.keys(deck.cards).length,
-    deckId: deck.id
+  render() {
+    const { navigation, title, cardsCount, deckId } = this.props;
+
+    return (
+      <Container>
+        <HeadingWrapper>
+          <Heading>{title}</Heading>
+          <SubHeading>{`${cardsCount} ${
+            cardsCount === 1 ? "Card" : "Cards"
+          }`}</SubHeading>
+        </HeadingWrapper>
+
+        <BtnWrapper>
+          <AddCardBtn>
+            <Button
+              color="gray"
+              title="Add Card"
+              onPress={() => navigation.navigate("NewCard", { deckId })}
+            />
+          </AddCardBtn>
+          <StartQuizBtn>
+            <Button
+              title="Start Quiz"
+              onPress={() => navigation.navigate("Quiz")}
+            />
+          </StartQuizBtn>
+          <DeleteDeckBtn onPress={this.handleDelete}>
+            <DeleteBtnTxt>Delete Deck</DeleteBtnTxt>
+          </DeleteDeckBtn>
+        </BtnWrapper>
+      </Container>
+    );
   }
 }
 
-export default connect(mapStateToProps)(DeckDetails)
+function mapStateToProps({ decks }, { route }) {
+  const deck = decks[route.params.deckId];
+
+  if (!deck) {
+    return {
+      render: false
+    }
+  }
+
+  return {
+    render: true,
+    title: deck.title,
+    cardsCount: Object.keys(deck.cards).length,
+    deckId: deck.id,
+  };
+}
+
+function mapDispatchToProps(dispatch, {route}) {
+  const deckId = route.params.deckId
+
+  return {
+    handleDeleteDeck: () => dispatch(handleDeleteDeck(deckId))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckDetails);
