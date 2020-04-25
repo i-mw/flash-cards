@@ -32,25 +32,43 @@ const SubmitBtn = Styled.View`
   width: 40%;
 `;
 
-export default function NewCard({ navigation }) {
-  return (
-    <Container behavior="padding">
-      <TouchableWithoutFeedback
-        onPress={Keyboard.dismiss}
-        touchSoundDisabled={true}
-      >
-        <InnerContainer>
-          <Input placeholder="Enter the question" />
-          <Input placeholder="Enter the answer" />
-          <SubmitBtn>
-            <Button
-              disabled={false}
-              title="Submit"
-              onPress={() => navigation.navigate("DeckDetails")}
+export default class NewCard extends React.Component {
+  state = {
+    question: "",
+    answer: "",
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const { question, answer } = this.state;
+
+    return (
+      <Container behavior="padding">
+        <TouchableWithoutFeedback
+          onPress={Keyboard.dismiss}
+          touchSoundDisabled={true}
+        >
+          <InnerContainer>
+            <Input
+              placeholder="Enter the question"
+              value={question}
+              onChangeText={(question) => this.setState({ question })}
             />
-          </SubmitBtn>
-        </InnerContainer>
-      </TouchableWithoutFeedback>
-    </Container>
-  );
+            <Input
+              placeholder="Enter the answer"
+              value={answer}
+              onChangeText={(answer) => this.setState({ answer })}
+            />
+            <SubmitBtn>
+              <Button
+                disabled={question === '' || answer === ''}
+                title="Submit"
+                onPress={() => navigation.navigate("DeckDetails")}
+              />
+            </SubmitBtn>
+          </InnerContainer>
+        </TouchableWithoutFeedback>
+      </Container>
+    );
+  }
 }
