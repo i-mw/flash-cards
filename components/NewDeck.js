@@ -1,14 +1,26 @@
 import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import Styled from "styled-components/native";
 
-const Container = Styled.View`
+const Container = Styled.KeyboardAvoidingView`
   flex: 1;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 30px;
-  padding-top: 50px;
 `;
+
+const InnerContainer = Styled.KeyboardAvoidingView`
+  flex: 1;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-right: 30px;
+  padding-left: 30px;
+`
 
 const Heading = Styled.Text`
   font-size: 40px;
@@ -16,7 +28,6 @@ const Heading = Styled.Text`
 `;
 
 const Input = Styled.TextInput`
-  margin-top: 70px;
   border: 1px solid gray;
   padding: 10px;
   font-size: 17.6px;
@@ -24,22 +35,25 @@ const Input = Styled.TextInput`
 `;
 
 const SubmitBtn = Styled.View`
-  margin-top: 50px;
   width: 40%;
 `;
 
 export default function NewDeck({ navigation }) {
   return (
-    <Container>
-      <Heading>What is the title of your new deck?</Heading>
-      <Input placeholder="Enter Deck Name" />
-      <SubmitBtn>
-        <Button
-          disabled={false}
-          title="Submit"
-          onPress={() => navigation.navigate("DeckDetails")}
-        />
-      </SubmitBtn>
+    <Container behavior="height">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} touchSoundDisabled={true}>
+        <InnerContainer>
+          <Heading>What is the title of your new deck?</Heading>
+          <Input placeholder="Enter Deck Name" />
+          <SubmitBtn>
+            <Button
+              disabled={false}
+              title="Submit"
+              onPress={() => navigation.navigate("DeckDetails")}
+            />
+          </SubmitBtn>
+        </InnerContainer>
+      </TouchableWithoutFeedback>
     </Container>
   );
 }
