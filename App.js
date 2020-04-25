@@ -14,6 +14,7 @@ import { Provider, connect } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
 import { handleInitialData } from "./actions/decks";
+import { setLocalNotification } from "./utils/helpers";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -38,6 +39,7 @@ function Home() {
 class App extends React.Component {
   componentDidMount() {
     this.props.handleInitialData();
+    setLocalNotification()
   }
 
   render() {
