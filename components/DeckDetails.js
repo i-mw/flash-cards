@@ -28,11 +28,11 @@ const BtnWrapper = Styled.View`
 const AddCardBtn = Styled.View`
 `;
 const StartQuizBtn = Styled.View`
-  margin-top: 10px;
+  margin-top: 20px;
 
 `;
 const DeleteDeckBtn = Styled.TouchableOpacity`
-  margin-top: 25px
+  margin-top: 30px;
 `;
 const DeleteBtnTxt = Styled.Text`
   text-align: center;
@@ -62,12 +62,12 @@ export default function DeckDetails({ navigation }) {
             onPress={() => navigation.navigate("Quiz")}
           />
         </StartQuizBtn>
-        <StartQuizBtn>
+        {/* <StartQuizBtn>
           <Button
             title="Start Quiz"
             onPress={() => navigation.navigate("EmptyDeckQuiz")}
           />
-        </StartQuizBtn>
+        </StartQuizBtn> */}
         <DeleteDeckBtn onPress={() => navigation.navigate("Home")}>
           <DeleteBtnTxt>Delete Deck</DeleteBtnTxt>
         </DeleteDeckBtn>

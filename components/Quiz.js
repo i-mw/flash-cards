@@ -16,8 +16,8 @@ export default function Quiz() {
   return (
     <Container>
       <Txt>2/2</Txt>
-      {/* <CardDetails/> */}
-      <Score/>
+      <CardDetails/>
+      {/* <Score/> */}
     </Container>
   )
 }

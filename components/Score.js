@@ -15,12 +15,12 @@ const Container = Styled.View`
 const HeadingTxt = Styled.Text`
   text-align: center;
   font-size: 20.8px;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
 `;
 const ScoreTxt = Styled.Text`
   text-align: center;
-  font-size: 96px;
-  margin-bottom: 50px;
+  font-size: 120px;
+  margin-bottom: 100px;
 `;
 const GoHomeBtn = Styled.View`
   width: 50%;
@@ -31,7 +31,7 @@ export default function Score() {
 
   return (
     <Container>
-      <HeadingTxt>Your Score is</HeadingTxt>
+      <HeadingTxt>Your Score</HeadingTxt>
       <ScoreTxt>70%</ScoreTxt>
       <GoHomeBtn>
         <Button

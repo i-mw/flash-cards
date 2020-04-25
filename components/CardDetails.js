@@ -28,7 +28,7 @@ const BtnWrapper = Styled.View`
   width: 60%;
 `;
 const CorrectBtn = Styled.View`
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 `;
 const IncorrectBtn = Styled.View`
 `;
@@ -48,7 +48,7 @@ export default function CardDetails() {
           <Button color="#008009" title="Correct" />
         </CorrectBtn>
         <IncorrectBtn>
-          <Button color="#fa8c05" title="Incorrect" />
+          <Button color="#f54545" title="Incorrect" />
         </IncorrectBtn>
       </BtnWrapper>
     </Container>

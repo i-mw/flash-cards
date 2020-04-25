@@ -14,7 +14,7 @@ const Container = Styled.TouchableOpacity`
   height: 150px;
   border-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: gray;
+  border-bottom-color: #dbd9d9;
 `;
 
 const Heading = Styled.Text`
