@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Styled from "styled-components/native";
+import { connect } from "react-redux";
 
 const Container = Styled.TouchableOpacity`
   justify-content: center;
@@ -27,12 +28,25 @@ const SubHeading = Styled.Text`
   color: gray;
 `;
 
-export default function DeckEntry(props) {
+function DeckEntry({ title, cardsCount, deckId }) {
   const navigation = useNavigation();
+
   return (
-    <Container onPress={() => navigation.navigate("DeckDetails")}>
-      <Heading>A deck title</Heading>
-      <SubHeading>3 cards</SubHeading>
+    <Container onPress={() => navigation.navigate("DeckDetails", { deckId })}>
+      <Heading>{title}</Heading>
+      <SubHeading>{`${cardsCount} ${cardsCount === 1 ? 'Card': 'Cards'}`}</SubHeading>
     </Container>
   );
 }
+
+function mapStateToProps({ decks }, { deckId }) {
+  const deck = decks[deckId];
+
+  return {
+    title: deck.title,
+    cardsCount: Object.keys(deck.cards).length,
+    deckId,
+  };
+}
+
+export default connect(mapStateToProps)(DeckEntry);
