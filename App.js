@@ -16,8 +16,16 @@ const Tab = createMaterialTopTabNavigator();
 function Home() {
   return (
     <Tab.Navigator initialRouteName="DeckList">
-      <Tab.Screen name="DeckList" component={DeckList} options={{title: 'DECKS'}}/>
-      <Tab.Screen name="NewDeck" component={NewDeck} options={{title: 'NEW DECK'}}/>
+      <Tab.Screen
+        name="DeckList"
+        component={DeckList}
+        options={{ title: "DECKS" }}
+      />
+      <Tab.Screen
+        name="NewDeck"
+        component={NewDeck}
+        options={{ title: "NEW DECK" }}
+      />
     </Tab.Navigator>
   );
 }
@@ -27,11 +35,27 @@ export default function App() {
     <NavigationContainer>
       <StatusBar />
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="DeckDetails" component={DeckDetails} />
-        <Stack.Screen name="NewCard" component={NewCard} options={{title: 'Add Card'}}/>
-        <Stack.Screen name="Quiz" component={Quiz} options={{title: 'Quiz'}}/>
-        <Stack.Screen name="EmptyDeckQuiz" component={EmptyDeckQuiz} options={{title: 'Quiz'}}/>
+        <Stack.Screen
+          name="NewCard"
+          component={NewCard}
+          options={{ title: "Add Card" }}
+        />
+        <Stack.Screen
+          name="Quiz"
+          component={Quiz}
+          options={{ title: "Quiz" }}
+        />
+        <Stack.Screen
+          name="EmptyDeckQuiz"
+          component={EmptyDeckQuiz}
+          options={{ title: "Quiz" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
