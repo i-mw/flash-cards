@@ -8,12 +8,12 @@ function DeckList({ deckIds }) {
   if (deckIds.length === 0) {
     return <View></View>;
   }
-  
+
   return (
     <FlatList
       style={{ flex: 1 }}
       data={deckIds}
-      renderItem={({item}) => {
+      renderItem={({ item }) => {
         return <DeckEntry key={item} deckId={item} />;
       }}
     />
@@ -21,8 +21,12 @@ function DeckList({ deckIds }) {
 }
 
 function mapStateToProps({ decks }) {
+  const deckIds = Object.keys(decks).sort(
+    (a, b) => decks[b].timestamp - decks[a].timestamp
+  );
+
   return {
-    deckIds: Object.keys(decks),
+    deckIds,
   };
 }
 

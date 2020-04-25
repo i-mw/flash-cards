@@ -18,6 +18,7 @@ export function saveDeck(title) {
   const deck = {
     id: deckId,
     title,
+    timestamp: Date.now(),
     cards: {},
   };
 
@@ -37,6 +38,7 @@ export function saveCard({ deckId, question, answer }) {
   const cardId = generateId();
   const card = {
     id: cardId,
+    timestamp: Date.now(),
     question,
     answer,
   };
