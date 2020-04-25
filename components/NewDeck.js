@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Styled from "styled-components/native";
 import { connect } from "react-redux";
+import { handleAddDeck } from "../actions/decks";
 
 const Container = Styled.KeyboardAvoidingView`
   flex: 1;
@@ -39,13 +40,21 @@ const SubmitBtn = Styled.View`
   width: 40%;
 `;
 
-export default class NewDeck extends React.Component {
+class NewDeck extends React.Component {
   state = {
     deckTitle: "",
   };
 
+  handleSubmit = () => {
+    const { handleAddDeck, navigation } = this.props;
+    const { deckTitle } = this.state;
+
+    handleAddDeck(deckTitle).then((deck) => {
+      navigation.navigate("DeckDetails", { deckId: deck.id });
+    });
+  };
+
   render() {
-    const { navigation } = this.props;
     const { deckTitle } = this.state;
 
     return (
@@ -65,7 +74,7 @@ export default class NewDeck extends React.Component {
               <Button
                 disabled={deckTitle === ""}
                 title="Submit"
-                onPress={() => navigation.navigate("DeckDetails")}
+                onPress={this.handleSubmit}
               />
             </SubmitBtn>
           </InnerContainer>
@@ -74,3 +83,11 @@ export default class NewDeck extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleAddDeck: (title) => dispatch(handleAddDeck(title)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(NewDeck);
