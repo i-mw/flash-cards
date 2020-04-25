@@ -48,6 +48,7 @@ class NewDeck extends React.Component {
   handleSubmit = () => {
     const { handleAddDeck, navigation } = this.props;
     const { deckTitle } = this.state;
+    this.setState({deckTitle: ""})
 
     handleAddDeck(deckTitle).then((deck) => {
       navigation.navigate("DeckDetails", { deckId: deck.id, title: deck.title });
