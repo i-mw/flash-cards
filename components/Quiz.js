@@ -20,7 +20,7 @@ function Quiz({ currentCardNum, currentCardId, cardsCount, deckId }) {
         <Txt>{`${currentCardNum}/${cardsCount}`}</Txt>
       )}
       {currentCardNum > cardsCount ? (
-        <Score />
+        <Score deckId={deckId}/>
       ) : (
         <CardDetails deckId={deckId} cardId={currentCardId} />
       )}

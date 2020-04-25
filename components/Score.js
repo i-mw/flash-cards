@@ -3,6 +3,7 @@ import { View, Text, Button } from "react-native";
 import Styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
+import { resetQuiz } from "../actions/currentQuiz";
 
 const Container = Styled.View`
   flex: 1;
@@ -23,31 +24,48 @@ const ScoreTxt = Styled.Text`
   font-size: 120px;
   margin-bottom: 100px;
 `;
-const GoHomeBtn = Styled.View`
+const RestartQuizBtn = Styled.View`
   width: 50%;
 `;
 
-function Score({score}) {
+const GoToDeckBtn = Styled.View`
+  width: 50%;
+  margin-top: 30px;
+`;
+
+function Score({ score, deckId, resetQuiz }) {
   const navigation = useNavigation();
 
   return (
     <Container>
       <HeadingTxt>Your Score</HeadingTxt>
       <ScoreTxt>{`${score}%`}</ScoreTxt>
-      <GoHomeBtn>
+      <RestartQuizBtn>
         <Button
-          title="Go to decks"
-          onPress={() => navigation.navigate("Home", { scree: "DeckList" })}
+          title="Restart Quiz"
+          onPress={resetQuiz}
         />
-      </GoHomeBtn>
+      </RestartQuizBtn>
+      <GoToDeckBtn>
+        <Button
+          title="Back to Deck"
+          onPress={() => navigation.navigate("DeckDetails", { deckId })}
+        />
+      </GoToDeckBtn>
     </Container>
   );
 }
 
-function mapStateToProps({currentQuiz}) {
+function mapStateToProps({ currentQuiz }) {
   return {
-    score: Math.round((currentQuiz.score/(currentQuiz.cardNum-1))*100)
-  }
+    score: Math.round((currentQuiz.score / (currentQuiz.cardNum - 1)) * 100),
+  };
 }
 
-export default connect(mapStateToProps)(Score)
+function mapDispatchToProps(dispatch) {
+  return {
+    resetQuiz: () => dispatch(resetQuiz()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Score);
