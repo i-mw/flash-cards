@@ -49,18 +49,22 @@ class DeckDetails extends React.Component {
 
     handleDeleteDeck().then(() => {
       navigation.navigate("Home");
-    })
+    });
   };
 
   handleStartQuiz = () => {
-    const {resetQuiz, navigation, deckId} = this.props
+    const { resetQuiz, navigation, deckId, cardsCount } = this.props;
 
-    resetQuiz()
-    navigation.navigate("Quiz", { deckId })
-  }
+    if (cardsCount === 0) {
+      navigation.navigate("EmptyDeckQuiz", { deckId });
+    } else {
+      resetQuiz();
+      navigation.navigate("Quiz", { deckId });
+    }
+  };
 
   shouldComponentUpdate() {
-    const {render} = this.props
+    const { render } = this.props;
     return render;
   }
 
@@ -85,10 +89,7 @@ class DeckDetails extends React.Component {
             />
           </AddCardBtn>
           <StartQuizBtn>
-            <Button
-              title="Start Quiz"
-              onPress={this.handleStartQuiz}
-            />
+            <Button title="Start Quiz" onPress={this.handleStartQuiz} />
           </StartQuizBtn>
           <DeleteDeckBtn onPress={this.handleDelete}>
             <DeleteBtnTxt>Delete Deck</DeleteBtnTxt>
@@ -104,8 +105,8 @@ function mapStateToProps({ decks }, { route }) {
 
   if (!deck) {
     return {
-      render: false
-    }
+      render: false,
+    };
   }
 
   return {
@@ -116,12 +117,12 @@ function mapStateToProps({ decks }, { route }) {
   };
 }
 
-function mapDispatchToProps(dispatch, {route}) {
-  const deckId = route.params.deckId
+function mapDispatchToProps(dispatch, { route }) {
+  const deckId = route.params.deckId;
 
   return {
     handleDeleteDeck: () => dispatch(handleDeleteDeck(deckId)),
-    resetQuiz: () => dispatch(resetQuiz())
+    resetQuiz: () => dispatch(resetQuiz()),
   };
 }
 
