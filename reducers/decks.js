@@ -1,8 +1,8 @@
-import { ADD_DECKS, ADD_DECK } from "../actions/decks";
+import { RECEIVE_DECKS, ADD_DECK } from "../actions/decks";
 
 export default function decks(state = {}, action) {
   switch (action.type) {
-    case ADD_DECKS:
+    case RECEIVE_DECKS:
       return action.decks;
     case ADD_DECK:
       return {

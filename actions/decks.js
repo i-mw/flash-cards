@@ -1,12 +1,12 @@
 import { getDecks, saveDeck } from "../utils/api";
 
-export const ADD_DECKS = "ADD_DECKS";
+export const RECEIVE_DECKS = "RECEIVE_DECKS";
 export const ADD_DECK = "ADD_DECK"
 
 export function handleInitialData() {
   return (dispatch) => {
     return getDecks().then((decks) => {
-      dispatch(addDecks(decks));
+      dispatch(receiveDecks(decks));
     });
   };
 }
@@ -20,9 +20,9 @@ export function handleAddDeck(title) {
   };
 }
 
-function addDecks(decks) {
+function receiveDecks(decks) {
   return {
-    type: ADD_DECKS,
+    type: RECEIVE_DECKS,
     decks,
   };
 }
