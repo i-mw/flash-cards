@@ -9,6 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 import Styled from "styled-components/native";
+import { connect } from "react-redux";
 
 const Container = Styled.KeyboardAvoidingView`
   flex: 1;
@@ -20,7 +21,7 @@ const InnerContainer = Styled.KeyboardAvoidingView`
   align-items: center;
   padding-right: 30px;
   padding-left: 30px;
-`
+`;
 
 const Heading = Styled.Text`
   font-size: 40px;
@@ -38,22 +39,38 @@ const SubmitBtn = Styled.View`
   width: 40%;
 `;
 
-export default function NewDeck({ navigation }) {
-  return (
-    <Container behavior="height">
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} touchSoundDisabled={true}>
-        <InnerContainer>
-          <Heading>What is the title of your new deck?</Heading>
-          <Input placeholder="Enter Deck Name" />
-          <SubmitBtn>
-            <Button
-              disabled={false}
-              title="Submit"
-              onPress={() => navigation.navigate("DeckDetails")}
+export default class NewDeck extends React.Component {
+  state = {
+    deckTitle: "",
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const { deckTitle } = this.state;
+
+    return (
+      <Container behavior="height">
+        <TouchableWithoutFeedback
+          onPress={Keyboard.dismiss}
+          touchSoundDisabled={true}
+        >
+          <InnerContainer>
+            <Heading>What is the title of your new deck?</Heading>
+            <Input
+              placeholder="Enter Deck Name"
+              value={deckTitle}
+              onChangeText={(deckTitle) => this.setState({ deckTitle })}
             />
-          </SubmitBtn>
-        </InnerContainer>
-      </TouchableWithoutFeedback>
-    </Container>
-  );
+            <SubmitBtn>
+              <Button
+                disabled={deckTitle === ""}
+                title="Submit"
+                onPress={() => navigation.navigate("DeckDetails")}
+              />
+            </SubmitBtn>
+          </InnerContainer>
+        </TouchableWithoutFeedback>
+      </Container>
+    );
+  }
 }
