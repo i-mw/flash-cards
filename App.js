@@ -9,6 +9,10 @@ import DeckDetails from "./components/DeckDetails";
 import NewCard from "./components/NewCard";
 import Quiz from "./components/Quiz";
 import EmptyDeckQuiz from "./components/EmptyDeckQuiz";
+import { createStore } from "redux";
+import { Provider, connect } from "react-redux";
+import reducer from "./reducers";
+import middleware from "./middleware";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -30,33 +34,48 @@ function Home() {
   );
 }
 
-export default function App() {
+class App extends React.Component {
+  componentDidMount() {
+    // todo: dispatch for initial data
+    // this.props.dispatch(handleInitialData())
+  }
+
+  render() {
+    return (
+      <NavigationContainer>
+        <StatusBar />
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="DeckDetails" component={DeckDetails} />
+          <Stack.Screen
+            name="NewCard"
+            component={NewCard}
+            options={{ title: "Add Card" }}
+          />
+          <Stack.Screen
+            name="Quiz"
+            component={Quiz}
+            options={{ title: "Quiz" }}
+          />
+          <Stack.Screen
+            name="EmptyDeckQuiz"
+            component={EmptyDeckQuiz}
+            options={{ title: "Quiz" }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+}
+
+export default function Index() {
   return (
-    <NavigationContainer>
-      <StatusBar />
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="DeckDetails" component={DeckDetails} />
-        <Stack.Screen
-          name="NewCard"
-          component={NewCard}
-          options={{ title: "Add Card" }}
-        />
-        <Stack.Screen
-          name="Quiz"
-          component={Quiz}
-          options={{ title: "Quiz" }}
-        />
-        <Stack.Screen
-          name="EmptyDeckQuiz"
-          component={EmptyDeckQuiz}
-          options={{ title: "Quiz" }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={createStore(reducer, middleware)}>
+      <App />
+    </Provider>
   );
 }
