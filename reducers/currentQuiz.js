@@ -4,7 +4,7 @@ export default function currentQuiz(state = {}, action) {
   switch(action.type) {
     case RESET_QUIZ:
       return {
-        cardNum: 0,
+        cardNum: 1,
         score: 0
       }
     default:
