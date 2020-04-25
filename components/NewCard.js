@@ -9,6 +9,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import Styled from "styled-components/native";
+import { connect } from "react-redux";
+import { handleAddCard } from "../actions/decks";
 
 const Container = Styled.View`
   flex: 1;
@@ -32,10 +34,22 @@ const SubmitBtn = Styled.View`
   width: 40%;
 `;
 
-export default class NewCard extends React.Component {
+class NewCard extends React.Component {
   state = {
     question: "",
     answer: "",
+  };
+
+  handleSubmit = () => {
+    const { handleAddCard, route, navigation } = this.props;
+    const { question, answer } = this.state;
+
+    this.setState({ question: "", answer: "" });
+    handleAddCard({ deckId: route.params.deckId, question, answer }).then(
+      () => {
+        navigation.navigate("DeckDetails");
+      }
+    );
   };
 
   render() {
@@ -61,9 +75,9 @@ export default class NewCard extends React.Component {
             />
             <SubmitBtn>
               <Button
-                disabled={question === '' || answer === ''}
+                disabled={question === "" || answer === ""}
                 title="Submit"
-                onPress={() => navigation.navigate("DeckDetails")}
+                onPress={this.handleSubmit}
               />
             </SubmitBtn>
           </InnerContainer>
@@ -72,3 +86,11 @@ export default class NewCard extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleAddCard: (info) => dispatch(handleAddCard(info)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(NewCard);
