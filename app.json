@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "flash-cards",
+    "description": "flash cards to help you study",
     "slug": "flash-cards",
     "platforms": [
       "ios",
@@ -22,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "me.imw.flashcards"
+    },
+    "android": {
+      "package": "me.imw.flashcards"
     }
   }
 }
