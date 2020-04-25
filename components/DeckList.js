@@ -4,8 +4,8 @@ import DeckEntry from "./DeckEntry";
 import { createStackNavigator } from "@react-navigation/stack";
 import { connect } from "react-redux";
 
-function DeckList({ deckIds }) {
-  if (deckIds.length === 0) {
+function DeckList({ deckIds, render }) {
+  if (!render) {
     return <View></View>;
   }
 
@@ -21,12 +21,19 @@ function DeckList({ deckIds }) {
 }
 
 function mapStateToProps({ decks }) {
+  if (decks === null || decks.length === 0) {
+    return {
+      render: false
+    }
+  }
+  
   const deckIds = Object.keys(decks).sort(
     (a, b) => decks[b].timestamp - decks[a].timestamp
   );
 
   return {
     deckIds,
+    render: true
   };
 }
 
