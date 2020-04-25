@@ -13,6 +13,7 @@ import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
+import { handleInitialData } from "./actions/decks";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -36,8 +37,7 @@ function Home() {
 
 class App extends React.Component {
   componentDidMount() {
-    // todo: dispatch for initial data
-    // this.props.dispatch(handleInitialData())
+    this.props.handleInitialData()
   }
 
   render() {
@@ -72,10 +72,18 @@ class App extends React.Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    handleInitialData: () => dispatch(handleInitialData())
+  }
+}
+
+const ConnectedApp = connect(null, mapDispatchToProps)(App)
+
 export default function Index() {
   return (
     <Provider store={createStore(reducer, middleware)}>
-      <App />
+      <ConnectedApp />
     </Provider>
   );
 }
