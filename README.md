@@ -16,8 +16,10 @@ The app was bootstrapped using expo command line interface.
 ## Table of Contents
 
 * [Quick Start](#quick-start)
+* [Tested on Android](#tested-on-android)
 * [Direct Dependencies](#direct-dependencies)
 * [File Structure](#file-structure)
+* [Expo](#expo)
 * [Contributing](#contributing)
 
 ## Quick Start
@@ -45,6 +47,11 @@ The installation guide assumes that you have update-to-date nodejs and npm prese
   * click `a` to view on android emulator (if you have installed).
   * click `i` to view on ios emulator (if you have installed).
 
+  You'll have to wait up to 2 minutes tell expo build the bundle. You can keep track of that in the terminal
+
+## Tested on Android
+
+The coding process and testing has been through a physical android mobile phone. So, Everything is tested and guaranteed to work appropriately and as expected on android.. IOS wasn't taken into account at all. So, there might be some glitches on it.
 
 ## Direct Dependencies
 
@@ -73,8 +80,8 @@ The project has these direct code dependencies, as indicated in `package.json` f
 *  expo-permissions
 
 And these Development dependencies:
-  babel-preset-expo
-  @babel/core
+* babel-preset-expo
+* @babel/core
 
 ## File Structure
 
