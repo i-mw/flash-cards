@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, TouchableWithoutFeedback } from "react-native";
 import Styled from "styled-components/native";
+import { connect } from "react-redux";
 
 const Container = Styled.View`
   flex: 1;
@@ -33,24 +34,47 @@ const CorrectBtn = Styled.View`
 const IncorrectBtn = Styled.View`
 `;
 
-export default function CardDetails() {
-  return (
-    <Container>
-      <QAWrapper>
-        <QATxt>Does React Native work with Android?</QATxt>
-        <QABtn>
-          <QABtnTxt>Answer</QABtnTxt>
-        </QABtn>
-      </QAWrapper>
+class CardDetails extends React.Component {
+  state = {
+    showing: "question",
+  };
 
-      <BtnWrapper>
-        <CorrectBtn>
-          <Button color="#008009" title="Correct" />
-        </CorrectBtn>
-        <IncorrectBtn>
-          <Button color="#f54545" title="Incorrect" />
-        </IncorrectBtn>
-      </BtnWrapper>
-    </Container>
-  );
+  render() {
+    const { showing } = this.state;
+
+    return (
+      <Container>
+        {showing === "question" ? (
+          <QAWrapper>
+            <QATxt>Does React Native work with Android?</QATxt>
+            <QABtn>
+              <QABtnTxt onPress={() => this.setState({ showing: "answer" })}>
+                Answer
+              </QABtnTxt>
+            </QABtn>
+          </QAWrapper>
+        ) : (
+          <QAWrapper>
+            <QATxt>Yes!</QATxt>
+            <QABtn>
+              <QABtnTxt onPress={() => this.setState({ showing: "answer" })}>
+                Question
+              </QABtnTxt>
+            </QABtn>
+          </QAWrapper>
+        )}
+
+        <BtnWrapper>
+          <CorrectBtn>
+            <Button color="#008009" title="Correct" />
+          </CorrectBtn>
+          <IncorrectBtn>
+            <Button color="#f54545" title="Incorrect" />
+          </IncorrectBtn>
+        </BtnWrapper>
+      </Container>
+    );
+  }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardDetails);
