@@ -13,6 +13,7 @@ function DeckList({ deckIds, render }) {
     <FlatList
       style={{ flex: 1 }}
       data={deckIds}
+      keyExtractor={item => item}
       renderItem={({ item }) => {
         return <DeckEntry key={item} deckId={item} />;
       }}
